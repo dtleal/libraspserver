@@ -1,38 +1,47 @@
 #ifndef _LRASPSERVER_H
 #define _LRASPSERVER_H
 
-#define BUFFER_SIZE 1024
+#define MAX_BUFFER_SIZE 0x400 //1024
 #define LIB_VERSION "lib raspserver v1.0"
 #define TRUE	    1
 #define FALSE	    0
 #define ERROR	    -1
 #define OK	    0
 
+#include <sys/socket>
+
 /*
  * Available struct for thread variables
  */
-struct lib_threads = {
-
+struct threads_config = {
+	pthread_t 	t_id;
+	pthread_mutex_t t_mutex;
 };
 
 
 /*
  * Struct for stored lib information
  */
-struct lib_config = {
+struct socket_config = {
+	int fd;
+	int port;
+	uint16_t data_size;
 	char *ip;
-	int  port;
-	char *buffer[BUFFER_SIZE];
-	int  buffer_size = BUFFER_SIZE;
-
-	struct lib_threads lib_threads;
+	char *data;
+	
+	struct sockaddr_in 	server;
+	struct sockaddr_in	client;
+	struct threads_config 	threads;
 };
 
 /*
- * 
+ * Send data with socket TCP IP
  */
-int send_data(struct lib_config, const char *msg,
-	      void *arg);
-int receive_data();
+int send_data(struct socket_config, const char *msg);
+
+/*
+ * Receive data from socket
+ */
+int receive_data(struct socket_config);
 
 #endif
