@@ -3,10 +3,10 @@
 
 #define MAX_BUFFER_SIZE 0x400 //1024
 #define LIB_VERSION "lib raspserver v1.0"
-#define TRUE	    1
-#define FALSE	    0
-#define ERROR	    -1
-#define OK	    0
+#define TRUE     1
+#define FALSE    0
+#define ERROR   -1
+#define OK       0
 
 #include <sys/socket>
 
@@ -14,8 +14,8 @@
  * Available struct for thread variables
  */
 struct threads_config = {
-	pthread_t 	t_id;
-	pthread_mutex_t t_mutex;
+    pthread_t t_id;
+    pthread_mutex_t t_mutex;
 };
 
 
@@ -23,15 +23,15 @@ struct threads_config = {
  * Struct for stored lib information
  */
 struct socket_config = {
-	int fd;
-	int port;
-	uint16_t data_size;
-	char *ip;
-	char *data;
-	
-	struct sockaddr_in 	server;
-	struct sockaddr_in	client;
-	struct threads_config 	threads;
+    int fd;
+    int port;
+    uint16_t data_size;
+    char *ip;
+    char *data;
+    
+    struct sockaddr_in server;
+    struct sockaddr_in client;
+    struct threads_config threads;
 };
 
 /*
