@@ -6,9 +6,16 @@
 #define TRUE     1
 #define FALSE    0
 #define ERROR   -1
-#define OK       0
+#define SUCESS   0
 
 #include <sys/socket>
+
+char *error_msg[4] = {
+    "Init list error",
+    "Erro 01 - Erro ao enviar a confirmacao de recebimento dos bytes de dados",
+    "Erro 02 - Divergencia entre os dados recebidos pelo socket",
+    "Erro 03 - Erro ao receber dados do socket"
+}
 
 /*
  * Available struct for thread variables
@@ -25,9 +32,10 @@ struct threads_config = {
 struct socket_config = {
     int fd;
     int port;
+    uint16_t received_size;
     uint16_t data_size;
     char *ip;
-    char *data;
+    char data[MAX_BUFFER_SIZE];
     
     struct sockaddr_in server;
     struct sockaddr_in client;
